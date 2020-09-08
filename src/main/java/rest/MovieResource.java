@@ -2,6 +2,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import entities.MovieDTO;
 import utils.EMF_Creator;
 import facades.MovieFacade;
 import javax.persistence.EntityManagerFactory;
@@ -11,7 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 //Todo Remove or change relevant parts before ACTUAL use
-@Path("Movie")
+@Path("movie")
 public class MovieResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
@@ -22,8 +23,6 @@ public class MovieResource {
     private static final MovieFacade FACADE =  MovieFacade.getFacadeExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     
-    
-    @Path("test")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
@@ -31,10 +30,25 @@ public class MovieResource {
     }
     @Path("count")
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getRenameMeCount() {
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getMovieCount() {
+
         long count = FACADE.getMovieCount();
-        //System.out.println("--------------->"+count);
-        return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
+
+        return GSON.toJson(count);
+
     }
+    
+    
+    @Path("addmovie")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String addMovie() {
+
+        MovieDTO movie = new MovieDTO(FACADE.addMovie());
+
+        return GSON.toJson(movie);
+
+    }
+    
 }

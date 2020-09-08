@@ -47,5 +47,20 @@ public class MovieFacade {
         }
         
     }
+    
+    public Movie addMovie(){
+        Movie movie = new Movie("god film", 2020);
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.persist(movie);
+            em.getTransaction().commit();
+            return movie;
+        }finally{  
+            em.close();
+        }
+        
+    }
+    
 
 }
