@@ -11,21 +11,22 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import static org.hamcrest.Matchers.*;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
-public class MovieFacade {
+public class MovieFacadeTest {
 
     private static EntityManagerFactory emf;
     private static MovieFacade facade;
 
-    public MovieFacade() {
+    public MovieFacadeTest() {
     }
 
     @BeforeAll
     public static void setUpClass() {
        emf = EMF_Creator.createEntityManagerFactoryForTest();
-      // facade = MovieFacade.getFacadeExample(emf);
+      facade = MovieFacade.getFacadeExample(emf);
     }
 
     @AfterAll
@@ -57,8 +58,20 @@ public class MovieFacade {
 
     // TODO: Delete or change this method 
     @Test
-    public void testAFacadeMethod() {
+    public void getMovieCountTest() {
        
+       long actual = facade.getMovieCount();
+       long expected = 5;
+       
+        assertEquals(expected, actual);
+               
+    }
+    
+    @Test 
+    public void addMovieTest(){
+        
+        Movie movie = facade.addMovie();
+        assertEquals(movie.getTitle(), "god film");
     }
 
 }

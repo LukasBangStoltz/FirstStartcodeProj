@@ -16,7 +16,7 @@ public class MovieFacade {
     private static EntityManagerFactory emf;
     
     //Private Constructor to ensure Singleton
-    private MovieFacade() {}
+    MovieFacade() {}
     
     
     /**
@@ -61,6 +61,14 @@ public class MovieFacade {
         }
         
     }
-    
+     public Movie getMovieById(long id){
+         EntityManager em = emf.createEntityManager();
+        try{
+            Movie movie = em.find(Movie.class,id);
+            return movie;
+        }finally {
+            em.close();
+        }
+    }
 
 }
