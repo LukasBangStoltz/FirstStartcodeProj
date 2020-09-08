@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -16,7 +17,7 @@ public class MovieFacade {
     private static EntityManagerFactory emf;
     
     //Private Constructor to ensure Singleton
-    MovieFacade() {}
+    private MovieFacade() {}
     
     
     /**
@@ -66,6 +67,19 @@ public class MovieFacade {
         try{
             Movie movie = em.find(Movie.class,id);
             return movie;
+        }finally {
+            em.close();
+        }
+    }
+     
+      public List <Movie> getAllMovies(){
+         EntityManager em = emf.createEntityManager();
+        try{
+            Query query = em.createQuery("Select m FROM Movie m");
+            List<Movie> result = query.getResultList();
+            
+         
+            return result;
         }finally {
             em.close();
         }

@@ -41,7 +41,7 @@ public class MovieFacadeTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-           
+           em.createNamedQuery("Movie.deleteAllRows").executeUpdate();
             em.persist(new Movie("harry potter", 2020));
             em.persist(new Movie("star wars", 2015));
 
@@ -61,7 +61,7 @@ public class MovieFacadeTest {
     public void getMovieCountTest() {
        
        long actual = facade.getMovieCount();
-       long expected = 5;
+       long expected = 2;
        
         assertEquals(expected, actual);
                
