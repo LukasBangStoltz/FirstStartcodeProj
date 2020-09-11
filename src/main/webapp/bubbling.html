@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .mydiv {width: 25px; height: 25px;background-color:yellow; margin:1px;}
+        </style>
+    </head>
+    <body>
+
+        <div id="outerdiv" class ="mydiv">
+            <div id="1" >Første </div>
+            <div id="2" >Anden </div>
+            <div id="3" >Tredje </div>
+            <div id="4" >Fjerde </div>
+            <div id="5" >Femte </div>
+            <div id="6" >Sjette </div>
+            <div id="7" >Syvende </div>
+            <div id="8" >Ottende </div>
+            <div id="9" >Niende </div>
+            <div id="10" >Tiende </div>
+            <p id="pId"></p>
+        </div>
+        
+        
+
+
+        <script>
+            const outerdiv = document.getElementById("outerdiv")
+            outerdiv.addEventListener("click", function () {
+                console.log("hi from: " + event.target.getAttribute("id"))
+                document.getElementById("pId").innerText = "hi from" + event.target.getAttribute("id")
+            })
+
+
+
+        </script>
+    </body>
+</html>
